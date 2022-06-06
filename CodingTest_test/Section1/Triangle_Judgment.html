@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="uft-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(a,b,c){
+                let answer="YES", max; //1. answer에 YES를 대입시켜서
+                let sum=a+b+c; //3. sum에 모든 숫자를 더한 값을 넣어준다.
+                if(a>b)
+                max=a;
+                else
+                max=b;
+                if(c>max)
+                answer=c;
+                if((sum-max)<=max) //2. 가장 큰 숫자가 나머지 둘보다 같거나 클때 NO를 출력한다. 4. sum에서 가장 큰 인 max를 빼서 큰숫자를 제외한 두수의 합을 구한다.
+                answer="NO";        //5. 두 수의 합이 max보다 작으면 NO를 출력한다.
+                return answer;
+            }
+            console.log(solution(13,33,17));
+            
+        </script>
+    </body>
+</html>

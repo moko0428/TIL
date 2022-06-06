@@ -5,15 +5,20 @@
     </head>
     <body>
         <script>
+            //함수 세 수 중 작은 값 비교하기
             function solution(a,b,c){
                 let answer;
-                if(a<b) answer=a;
-                else answer=b;
-                if(c<answer) answer=c;
+                if(a<b)
+                answer=a;
+                else
+                answer=b;
+                if(c<answer)
+                answer=c;
 
                 return answer;
             }
-            console.log(solution(2,5,11));
+            //가장 작은 수 출력
+            console.log(solution(2,5,1));
         </script>
     </body>
 </html>
