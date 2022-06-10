@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="uft-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            //forEach, map, filter,reduce
+            //forEach:배열요소를 하나하나 탐색하면서 콜백 함수를 반복 호출한다. for문 대신 사용하는 정도
+            // function forEach(predicate, thisArg){
+            //     for(let i=0; i<a.length;i++){
+            //         predicate(a[i], i);
+            //     }
+            // }
+            // a=[10,11,12,13,14,15];
+            // a.forEach(function(v,i){
+            //     console.log(v,i, this); //forEach의 내부가 아닌 콜백 함수의 인자
+            // }, [1, 2]);
+
+            //map:원본 배열을 하나하나 탐색하면서 요소들을 이용해 새로운 배열을 생성한다.
+            // function map(predicate, thisArg){
+            //     let list=[];
+            //     for(let i=0; i<a.length; i++){
+            //         list.push(predicate(a[i], i));
+            //     }
+            //     return list;
+            // }
+            // a=[10,11,12,13,14,15];
+            // let answer=a.map(function(v,i){
+            //     // return v*v;
+            //     if(v%2==0)return v;
+            // }, [1,2]);
+            // console.log(answer);
+
+            //filter:원리는 map과 동일하지만 원본 배열과 길이가 다를수도 있고 원하는 원소만 배열을 생성해서 리턴해준다.
+            // function filter(predicate, thisArg){
+            //     let list=[];
+            //     for(let i=0; i<a.length; i++){
+            //         if(predicate(a[i],i))
+            //         list.push(a[i]);
+            //     }
+            //     return list;
+            // }
+            // a=[10,11,12,13,14,15];
+            // let answer=a.filter(function(v,i){
+            //     return v%2==0;
+            // }, [1,2]);
+            // console.log(answer);
+
+            //reduce:map, filter 처럼 배열을 생성하는 것이 아니라 어떤 값을 생성해서 리턴한다.
+            // function reduce(predicate, val){
+            //     let res=val;
+            //     for(let i=0; i<a.length; i++){
+            //         res=predicate(res, a[i]);
+            //     }
+            //     return res;
+            // }
+            a=[10,11,12,13,14,15];
+            let answer=a.reduce(function(acc,v){
+                return acc+v;
+            },0);
+            console.log(answer);
+        </script>
+    </body>
+</html>
