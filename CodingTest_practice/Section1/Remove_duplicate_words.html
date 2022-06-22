@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="uft-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(s){
+                let answer;
+                //console.log(s.indexOf("time"));
+                answer = s.filter(function(v, i){
+                    //콜백함수의 내부
+                    //console.log(v,i);//value, index(good, 0)
+                    //if(s.indexOf(v)===i) return true;
+                    return s.indexOf(v)===i;
+                });
+
+                return answer;
+            }
+            let str = ["good", "time", "good", "time", "student"];
+            console.log(solution(str));
+        </script>
+    </body>
+</html>
