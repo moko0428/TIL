@@ -1,3 +1,3 @@
-# WILT
-What I learned today
-2022.06.04
+# TIL
+Moko0428's TIL
+2022.06.01
