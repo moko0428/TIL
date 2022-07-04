@@ -8,22 +8,162 @@
     </head>
     <body>
         <script>
-        function showPrimes(n) {
+          /*
+          // let user = {};
 
-for (let i = 2; i < n; i++) {
-  if (!isPrime(i)) continue;
+          // //set
+          // user["likes birds"] = true;
 
-  
-}
-}
+          // //get
+          // alert(user["likes birds"]); // true
 
-function isPrime(n) {
-for (let i = 2; i < n; i++) {
-  if (n % i == 0) return false;
-}
+          // //delete
+          // delete user["likes birds"];
 
-return true;
-}
-        </script>
+          //user.name = "Pete"; //(*)
+          //alert(user.name); //Pete
+
+          // user.isAdmin = true;
+          // alert(user.isAdmin);
+          //alert(user.name);
+          //alert(user.age);
+          // delete user.age;
+          // alert(user.age);
+
+          //문법 에러가 발생한다.
+          //user.likes birds = true;
+          // let key = "likes birds";
+
+          // //user["likes birds"] = true; 와 같다.
+          // user[key] = true;
+*/
+          /*
+          let user = {
+            name : "Lee",
+            age : 24
+          };
+
+          let key = prompt("사용자의 아떤 정보를 얻고 싶은가요?", "name");
+
+          //변수로 접근
+          alert(user.key); //undefined
+          */
+         /*
+        
+          let fruit = 'apple';
+
+          let bag = {
+            [fruit + 'Computers'] : 5 //bag-appleComputers = 5
+          };
+          
+          bag[fruit] = 5;*/
+          /*
+        function makeUser(name, age){
+          return {
+            name : name,
+            age : age,
+            // ... 등등
+          };
+        }
+        let user = makeUser("Lee", 24);
+        alert(user.name); //Lee
+        */
+       /*
+       function makeUser(name, age){
+        return {
+          name, //name : name 과 같음
+          age, //age : age 와 같음
+          //...
+        };
+       }
+       */
+      //예약어를 키로 사용해도 괜찮다.
+      /*
+      let obj = {
+        for : 1,
+        let : 2,
+        return : 3,
+      };
+      alert(obj.for + obj.let + obj.return); //6
+      */
+     /*
+     let obj = {
+      0 : "test"
+     };
+     //숫자 0은 문자열 "0"으로 변환하기 때문에 두 얼럿 창은 같은 프로퍼티에 접근하다.
+     alert(obj["0"]); //test
+     alert(obj[0]); //test
+     */
+    // let obj = {};
+    // obj.__proto__ = 5; //숫자를 할당한다.
+    // alert(obj.__proto__); //[object Object] - 숫자를 할당했지만 값은 객체가 되었습니다. 의도한대로 동작하지 않는다.
+    // let user = {};
+    // alert(user.noSuchProperty === undefined);// true는 '프로퍼티가 존재하지 않음'을 의미한다.
+
+    // "key" in Object
+
+    // let user = { name : "Lee", age : 30};
+
+    // alert("age" in user); //true
+    // alert("blabla" in user); //false
+
+    // let user = {age : 24};
+
+    // let key = "age";
+    // alert(ket in user); //true 변수 key에 저장된 값("age")을 사용해 프로퍼티 존재 여부를 확인한다.
+
+    // let obj = {
+    //   test : undefined
+    // };
+
+    // alert(obj.test);
+    // alert("test" in obj);
+    // for(key in obj){
+    //   //각 프로퍼티 키(key)를 이용하여 본문 (body)을 실행한다.
+    // }
+
+    // let user = {
+    //   name : "Lee",
+    //   age : 24,
+    //   isAdmin : true
+    // };
+
+    // for(let key in user){
+    //   alert(key); //키
+    //   alert(user[key]); //값
+    // }
+    // let codes = {
+    //   "49": "독일",
+    //   "41": "스위스",
+    //   "44": "영국",
+    //   // ..,
+    //   "1": "미국"
+    // };
+
+    // for (let code in codes) {
+    //   alert(code); // 1, 41, 44, 49
+    // }
+    // let user = {
+    //  name: "John",
+    //  surname: "Smith"
+    // };
+    // user.age = 25; // 프로퍼티를 하나 추가합니다.
+
+    // // 정수 프로퍼티가 아닌 프로퍼티는 추가된 순서대로 나열됩니다.
+    // for (let prop in user) {
+    //   alert( prop ); // name, surname, age
+    // }
+    let codes = {
+      "+49": "독일",
+      "+41": "스위스",
+      "+44": "영국",
+      // ..,
+      "+1": "미국"
+    };
+
+    for (let code in codes) {
+      alert( +code ); // 49, 41, 44, 1
+    }
+    </script>
     </body>
 </html>
