@@ -8,26 +8,16 @@
     </head>
     <body>
       <script>
-
-        function marry(man, woman){
-          woman.husband = man;
-          man.wife = woman;
-          
-          return {
-            father : man,
-            mother : woman
+        let user = {
+          firstName : "준영",
+          sayHi(){
+            let arrow = () => alert(this.firstName);
+            arrow();
           }
-        }
+        };
 
-        let family = marry({
-          name : "John"
-        }, {
-          name : "Ann"
-        });
-
-        delete family.father;
-        delete family.mother.husband;
-        //test
+        user.sayHi(); //준영
+        
       </script>
     </body>
 </html>
