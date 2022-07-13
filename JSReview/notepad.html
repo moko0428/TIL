@@ -8,15 +8,23 @@
     </head>
     <body>
       <script>
-        let user = {
-          firstName : "준영",
-          sayHi(){
-            let arrow = () => alert(this.firstName);
-            arrow();
-          }
-        };
 
-        user.sayHi(); //준영
+       function User(name){
+        this.name = name;
+
+        this.sayHi = function(){
+          alert("제 이름은 " + this.name + " 입니다.");
+        };
+       }
+
+       let bora = new User("이보라");
+
+       bora.sayHi(); 제 이름은 이보라 입니다.
+       
+       bora = {
+        name : "이보라",
+        sayHi: function(){...}
+       }
         
       </script>
     </body>
