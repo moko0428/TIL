@@ -8,24 +8,11 @@
     </head>
     <body>
       <script>
-
-       function User(name){
-        this.name = name;
-
-        this.sayHi = function(){
-          alert("제 이름은 " + this.name + " 입니다.");
-        };
-       }
-
-       let bora = new User("이보라");
-
-       bora.sayHi(); 제 이름은 이보라 입니다.
-       
-       bora = {
-        name : "이보라",
-        sayHi: function(){...}
-       }
         
+        //user가 존재할 경우 user.name에 값을 쓰려는 의도로 아래와 같이 코드를 작성
+        user?.name = "Lee"; //SyntaxError: Invalid left-hand side in assignment
+        //에러가 발생하는 이유는 undefined = "Lee"이 되기 때문이다.
+
       </script>
     </body>
 </html>
