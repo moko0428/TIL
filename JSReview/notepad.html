@@ -8,10 +8,14 @@
     </head>
     <body>
       <script>
-        
-        //user가 존재할 경우 user.name에 값을 쓰려는 의도로 아래와 같이 코드를 작성
-        user?.name = "Lee"; //SyntaxError: Invalid left-hand side in assignment
-        //에러가 발생하는 이유는 undefined = "Lee"이 되기 때문이다.
+
+        let globalSymbol = Symbol.for("name");
+        let localSymbol = Symbol("name");
+
+        alert(Symbol.keyFor(globalSymbol)); name, 전역 심볼
+        alert(Symbol.keyFor(localSymbol)); undefined, 전역 심볼이 아님
+
+        alert(localSymbol.description); name
 
       </script>
     </body>
