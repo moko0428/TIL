@@ -9,13 +9,15 @@
     <body>
       <script>
 
-        let globalSymbol = Symbol.for("name");
-        let localSymbol = Symbol("name");
+      let obj = {
+        toString(){
+          return "2";
+        }
+      };
 
-        alert(Symbol.keyFor(globalSymbol)); name, 전역 심볼
-        alert(Symbol.keyFor(localSymbol)); undefined, 전역 심볼이 아님
-
-        
+      alert(obj * 2); 22("2" + 2), 문자열이 반환되기 때문에 문자열끼리의
+                                   병합이 일어났다.
+                                   
 
       </script>
     </body>
