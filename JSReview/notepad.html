@@ -9,18 +9,14 @@
     <body>
       <script>
         
-        let arr = [1, 2, 3];
+        let arr = ["I", "go", "to", "home"];
 
-        alert(arr); 1,2,3
-        alert(String(arr) === '1,2,3') true
+        delete arr[1]; "go"를 삭제함
 
-        alert([] + 1); 1
-        alert([1] + 1); 11
-        alert([1,2] + 1), 1,21
+        alert(arr[1]); undefined
 
-        alert("" + 1); 1
-        alert("1" + 1); 11
-        alert("1,2" + 1) 1,21
+        delete를 써서 요소를 지우고 난 후 배열 --> arr = ["I", , "to", "home"]
+        alert(arr.length); 4
 
       </script>
     </body>
