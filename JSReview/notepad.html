@@ -8,8 +8,8 @@
     </head>
     <body>
       <script>
+        //let arr = ["사과", "배", "딸기", "바나나"];
         
-        let arr = ["사과", "수박", "참외"];
 
         // arr.push("배"); //맨 뒤에 요소 추가
         // arr.pop(); //맨 뒤에 요소 삭제
@@ -17,8 +17,20 @@
         // arr.unshift("딸기"); //맨 앞 요소 추가
         
         //arr.splice(0,2,"딸기", "메론"); 0에서 2까지 지우고(0에서 두개) 새로운 요소 "딸기", "메론" 추가
-        
-        alert(arr);
+        //arr.slice(1,3); 배, 딸기 인덱스 번호가 1부터 3인 요소까지 복사
+        //alert(arr.slice(-4)); //사과 배 딸기 바나나
+
+        let arr = [1,2];
+
+        let arrayLike = {
+          0: "something",
+          1: "else",
+          [Symbol.isConcatSpreadable]: true,
+          length: 2
+        };
+
+        alert(arr.concat(arrayLike)); 1, 2, something, else
+
       </script>
     </body>
 </html>
