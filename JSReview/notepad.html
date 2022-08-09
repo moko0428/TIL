@@ -9,18 +9,15 @@
     <body>
       <script>
 
-        function User(name){
-          this.name = name;
+let set = new Set(["oranges", "apples", "bananas"]);
 
-          this.sayHi = function(){
-            alert("제 이름은 " + this.name + "입니다.");
-          };
-        }
+for (let value of set) alert(value);
 
-        let bora = new User("이보라");
+.forEach를 사용해도 동일하게 동작한다.
+set.forEach((value, valueAgain, set) => {
+  alert(value);
+});
 
-        bora.sayHi(); 제 이름은 이보라입니다.
-        
       </script>
     </body>
 </html>
