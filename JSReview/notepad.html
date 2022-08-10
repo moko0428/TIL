@@ -9,14 +9,27 @@
     <body>
       <script>
 
-let set = new Set(["oranges", "apples", "bananas"]);
+let visitedSet = new WeakSet();
 
-for (let value of set) alert(value);
+let john = { name: "John" };
+let pete = { name: "Pete" };
+let mary = { name: "Mary" };
 
-.forEach를 사용해도 동일하게 동작한다.
-set.forEach((value, valueAgain, set) => {
-  alert(value);
-});
+visitedSet.add(john);  John이 사이트를 방문한다.
+visitedSet.add(pete);  이어서 Pete가 사이트를 방문한다.
+visitedSet.add(john);  이어서 John이 다시 사이트를 방문한다.
+
+visitedSet엔 두 명의 사용자가 저장될것이다.
+
+John의 방문 여부를 확인해보자.
+alert(visitedSet.has(john));  true
+
+Mary의 방문 여부를 확인해보자.
+alert(visitedSet.has(mary));  false
+
+john = null;
+
+visitedSet에서 john을 나타내는 객체가 자동으로 삭제된다.
 
       </script>
     </body>
