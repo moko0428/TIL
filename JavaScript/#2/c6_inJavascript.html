@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>in JavaScript</title>
+</head>
+<body>
+    
+    <div class="hello"> 
+        <h1>Click me!</h1>
+    </div>
+    <div class="hello"> 
+        <h1>Click me!</h1>
+    </div>
+    
+    <script> 
+    //step 1. element 찾기
+const h1 = document.querySelector(".hello:first-child h1");
+
+//console.dir(title); //이벤트 설정 가능한 dir
+
+function hadleTitleClick() {
+    //step 3. 그 event에 반응하기
+    // if (h1.style.color === "blue") {
+    //     console.log(h1.style.color);
+    //     h1.style.color = "tomato";
+    // } else {
+    //     console.log(h1.style.color);
+    //     h1.style.color = "blue";
+    // }
+    //변수를 이용한 표기법
+    const currentColor = h1.style.color;
+    let newColor;
+     
+    if (currentColor === "blue") {
+        newColor = "tomato";
+    } else {
+        newColor = "blue";
+    }
+    h1.style.color = newColor;
+}
+
+
+//step 2. event를 listen하기
+h1.addEventListener("click", hadleTitleClick);
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Lee TImes</title>
+</head>
+<style>
+    body{
+         height: 100vh; 
+        margin: 20px;
+        display: flex;
+        justify-content: space-between; 
+        align-items: center;
+        flex-wrap: wrap-reverse;
+        flex-direction: row-reverse; /*flex-direction이 column에 있다면 
+                    주축이 적용되는 justify-content가 수직으로 적용된다.*/
+     }
+    div{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 300px;
+        font-size: 28px;
+        color:white;
+        height: 300px;
+        background-color: teal;
+    }
+    #second{
+        background-color: wheat;
+    }
+</style>
+<body>
+    <div>1</div>
+    <div id="second">2</div>
+    <div>3</div>
+    
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Lee TImes</title>
+</head>
+<style>
+    body{
+        height: 1000vh;
+        margin: 50px;
+     }
+    span{
+        background-color: yellowgreen;
+        padding: 5px;
+        border-radius: 10px;
+        
+    }
+    /* 형제 */
+    p + span{ 
+        color: yellow;
+        text-decoration: underline ;
+    }
+    /* 바로 아래 자식 */
+    p + span{ 
+        color: black;
+        text-decoration: underline ;
+    }
+</style>
+<body>
+    <div>
+        
+        <p>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+            Nihil neque et porro omnis alias. 
+            Ipsum nostrum at aliquam consequuntur illo quas, 
+            consequatur molestias. Aspaeriores obcaecati quas 
+            dolores aliquam incidunt autem. <span>inside</span>
+        </p>
+        <span>hello</span>
+    </div>
+</div>
+</body>
+</html>

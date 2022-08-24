@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>More Events</title>
+</head>
+<body>
+    
+    <div class="hello"> 
+        <h1>Click me!</h1>
+    </div>
+    <div class="hello"> 
+        <h1>Click me!</h1>
+    </div>
+    
+    <script> 
+    const h1 = document.querySelector(".hello:first-child h1");
+
+//console.dir(title); //이벤트 설정 가능한 dir
+
+function hadleTitleClick() {
+    h1.style.color = "blue";
+    
+    
+}
+function hadleMouseEnter() {
+    h1.innerText = "Mouse is here!";
+}
+function hadleMouseLeave() {
+    h1.innerText = "Mouse is gone!"
+}
+
+function hadleWindowResize() {
+    document.body.style.backgroundColor = "tomato";
+}
+function hadleWindowCopy() {
+    alert("copier!");
+}
+function handleWindowOffline() {
+    alert("SOS no WIFI");
+}
+function handleWindowOnline() {
+    alert("ALL GOOOD");
+}
+
+h1.addEventListener("click", hadleTitleClick);
+h1.addEventListener("mouseenter", hadleMouseEnter);
+h1.addEventListener("mouseleave", hadleMouseLeave);
+
+
+window.addEventListener("resize", hadleWindowResize);
+window.addEventListener("copy", hadleWindowCopy);
+window.addEventListener("offline", handleWindowOffline);
+window.addEventListener("online", handleWindowOnline);
+
+
+
+    </script>
+</body>
+</html>

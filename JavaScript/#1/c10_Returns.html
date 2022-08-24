@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Returns</title>
+</head>
+<body>
+    <script> 
+   // const age = 24;
+// function calculatorKrAge(ageOfForeigner) { //24
+//     ageOfForeigner + 2; //26
+//     return "hello";
+// }
+
+// const krAge = calculatorKrAge(age); //26
+
+// console.log(krAge);
+
+const calculator = {
+    add: function(a,b){
+        return a+b;
+    },
+    minus: function(a,b){
+        return a-b;
+    },
+    times: function(a,b){
+        return a*b;
+    },
+    divide: function(a,b){
+        return a/b;
+    },
+    powerof: function(a,b){
+        return a**b;
+    },
+};
+
+const plusResult = calculator.add(2, 3);
+const minusResult = calculator.minus(plusResult, 10);
+const timesResult = calculator.times(10, minusResult);
+const divideResult = calculator.divide(timesResult, plusResult);
+const powerofResult = calculator.powerof(divideResult, minusResult);
+
+console.log(powerofResult);
+    </script>
+</body>
+</html>

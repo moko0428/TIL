@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>in JavaScript 2</title>
+    <style>
+        body{
+    background-color: beige;
+}
+
+h1{
+    color: cornflowerblue;
+    transition: color .5s ease-in-out;
+}
+
+.active{
+    color: tomato;
+}
+
+.fonts{
+    font-family: 'Courier New', Courier, monospace;
+}
+    </style>
+</head>
+<body>
+    
+    <div class="hello"> 
+        <h1 class="fonts">Click me!</h1>
+    </div>
+    <div class="hello"> 
+        <h1 class="fonts">Click me!</h1>
+    </div>
+    
+    <script> 
+    //step 1. element 찾기
+const h1 = document.querySelector(".hello:first-child h1");
+
+//console.dir(title); //이벤트 설정 가능한 dir
+
+function hadleTitleClick() {
+    //const activeClass = "active";
+
+    // if (h1.classList.contains(activeClass)) {
+    //     h1.classList.remove(activeClass);
+    // } else {
+    //     h1.classList.add(activeClass);
+    // }
+    h1.classList.toggle("active");
+}
+
+
+//step 2. event를 listen하기
+h1.addEventListener("click", hadleTitleClick);
+
+    </script>
+</body>
+</html>

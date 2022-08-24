@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Lee TImes</title>
+</head>
+<style>
+    body{
+        height: 1000vh;
+        margin: 50px;
+     }
+    span{
+        background-color: yellowgreen;
+        padding: 5px;
+        border-radius: 10px;
+        
+    }
+    /* 형제 */
+    input{
+        border: 1px solid wheat;
+    }
+    input:required{
+        border-color: tomato;
+    }
+    input[placeholder~="name"]{
+        background-color: green;
+    }
+</style>
+<body>
+    <div> 
+        <form>
+            <input type="text" placeholder="First name"/>
+            <input type="text" placeholder="Last name"/>
+            <input type="password" required placeholder="password"/>
+        </form>
+    </div>
+</div>
+</body>
+</html>

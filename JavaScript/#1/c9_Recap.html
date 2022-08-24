@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recap</title>
+</head>
+<body>
+    <script> 
+   //Basic Data Type
+"text" //string
+5 //integer
+
+//const and let
+const a = 5; //값이 변하지 않는 저장
+let b = 5; //값이 변하는 저장
+
+//Boolean
+true false //참, 거짓
+undefined //변수에 값을 부여하지 않은 상태
+null // 값이 비어있는 상태
+
+//Array
+const toBuy = ["potato", "tomato", "pizza"]; //대괄호 []로 시작
+toBuy.push("Kimbab"); //김밥을 요소에 추가
+toBuy[2] = "water"; //pizza가 water로 변경됨
+
+console.log(toBuy);
+
+
+//Object
+const player = { //중괄호 { }로 시작
+    name: "Lee",
+    points: 10,
+    fat: true,
+};
+
+console.log(player.name);
+console.log(player.points + 15);
+player.fat = false; //값을 변경
+console.log(player.fat);
+
+//function
+function plus(firstNumber, secondNumber) { //매개변수를 받는다.
+    console.log(firstNumber + secondNumber); 
+}
+
+plus(2 + 5);
+
+const calculator = {
+    add: function(a,b){
+        console.log(a+b);
+    },
+    minus: function(a,b){
+        console.log(a-b);
+    },
+    divide: function(a,b){
+        console.log(a/b);
+    },
+    powerof: function(a,b){
+        console.log(a**b);
+    },
+};
+
+calculator.add(5,1);
+calculator.minus(5,1);
+calculator.divide(5,1);
+calculator.powerof(5,1);
+
+    </script>
+</body>
+</html>
