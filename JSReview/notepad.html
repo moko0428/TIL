@@ -9,19 +9,21 @@
 <body>
     <script>
 
-let schedule = `{
-  "meetups": [
-    {"title":"Conference","date":"2017-11-30T12:00:00.000Z"},
-    {"title":"Birthday","date":"2017-04-18T12:00:00.000Z"}
-  ]
-}`;
+let obj = { a: 1, b: 2, c: 3 };
+let objCopy = { ...obj }; // 객체를 펼쳐서 각 요소를 분리후, 
+                          //매개변수 목록으로 만든 다음에
+                          // 매개변수 목록을 새로운 객체에 할당함
 
-schedule = JSON.parse(schedule, function(key, value) {
-  if (key == 'date') return new Date(value);
-  return value;
-});
+// 객체 복사본의 프로퍼티들이 기존 객체의 프로퍼티들과 진짜 같을까?
+alert(JSON.stringify(obj) === JSON.stringify(objCopy)); // true
 
-alert( schedule.meetups[1].date.getDate() ); // 잘 동작한다!
+// 두 객체는 같을까?
+alert(obj === objCopy); // false (참조가 다름)
+
+// 참조가 다르므로 기존 객체를 수정해도 복사본은 영향을 받지 않는다.
+obj.d = 4;
+alert(JSON.stringify(obj)); // {"a":1,"b":2,"c":3,"d":4}
+alert(JSON.stringify(objCopy)); // {"a":1,"b":2,"c":3}
 
     </script>
 </body>
