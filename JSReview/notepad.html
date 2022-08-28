@@ -9,17 +9,21 @@
 <body>
     <script>
 
-function sayHiBye(firstName, lastName) {
+let value = "이름이 같은 다른 변수";
 
-헬퍼(helper) 중첩 함수
-function getFullName() {
-  return firstName + " " + lastName;
+function f() {
+  let value = "가장 가까운 변수";
+
+  function g() {
+    debugger;  콘솔에 alert(value);를 입력하면 
+    }           '이름이 같은 다른 변수'가 출력된다.
+  
+  return g;
 }
 
-alert( "Hello, " + getFullName() );
-alert( "Bye, " + getFullName() );
+let g = f();
+g();
 
-}
     </script>
 </body>
 </html>
