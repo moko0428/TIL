@@ -1,29 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
+  </head>
+  <body>
     <script>
 
-let value = "이름이 같은 다른 변수";
+      let sayHi = function func(who) {
+        if (who) {
+          alert(`Hello, ${who}`);
+        } else {
+          func("Guest");  원하는 값이 제대로 출력된다.
+        }
+      };
 
-function f() {
-  let value = "가장 가까운 변수";
+      let welcome = sayHi;
+      sayHi = null;
 
-  function g() {
-    debugger;  콘솔에 alert(value);를 입력하면 
-    }           '이름이 같은 다른 변수'가 출력된다.
-  
-  return g;
-}
-
-let g = f();
-g();
-
+      welcome();  Hello, Guest (중첩 호출이 제대로 동작함)
     </script>
-</body>
+  </body>
 </html>
