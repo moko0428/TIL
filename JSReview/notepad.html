@@ -8,19 +8,18 @@
   </head>
   <body>
     <script>
+      function getFunc() {
 
-      let sayHi = function func(who) {
-        if (who) {
-          alert(`Hello, ${who}`);
-        } else {
-          func("Guest");  원하는 값이 제대로 출력된다.
-        }
-      };
+        let value = "test";
 
-      let welcome = sayHi;
-      sayHi = null;
+        let func = function () {
+          alert(value);
+        };
 
-      welcome();  Hello, Guest (중첩 호출이 제대로 동작함)
+        return func;
+      }
+
+      getFunc()();  getFunc의 렉시컬 환경에 있는 값 "test"가 출력됩니다.
     </script>
   </body>
 </html>
