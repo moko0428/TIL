@@ -8,18 +8,9 @@
   </head>
   <body>
     <script>
-      function getFunc() {
+      setTimeout(() => alert("World"));
 
-        let value = "test";
-
-        let func = function () {
-          alert(value);
-        };
-
-        return func;
-      }
-
-      getFunc()();  getFunc의 렉시컬 환경에 있는 값 "test"가 출력됩니다.
+      alert("Hello");
     </script>
   </body>
 </html>
