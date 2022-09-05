@@ -89,9 +89,8 @@
         </div>
       );
     }
-
     function App() {
-      const [index, setIndex] = React.useState("xx");
+      const [index, setIndex] = React.useState("x");
       const onSelect = (event) => {
         setIndex(event.target.value);
       };
@@ -104,7 +103,7 @@
             <option value="1">Km & Miles</option>
           </select>
           <hr />
-          {index === "xx" ? "Please select your units" : null}
+          {index === "x" ? "Please select your units" : null}
           {index === "0" ? <MinutesToHours /> : null}
           {index === "1" ? <KmToMiles /> : null}
         </div>
