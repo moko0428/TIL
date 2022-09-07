@@ -8,19 +8,18 @@
   </head>
   <body>
     <script>
-      let sum1 = function (a, b) {
-        return a + b;
-      };
+      let sayHi1 = () => alert("Hi");
+      sayHi1();
 
-      function sum2(a, b) {
-        return a + b;
+      function sayHi2() {
+        return alert("Hi");
       }
+      sayHi2();
 
-      let sum3 = (a, b) => a + b;
-
-      alert(sum1(1, 2)); //3
-      alert(sum2(1, 2)); //3
-      alert(sum3(1, 2)); //3
+      let sayHi3 = function () {
+        return alert("Hi");
+      };
+      sayHi3();
     </script>
   </body>
 </html>
