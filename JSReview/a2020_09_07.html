@@ -8,21 +8,19 @@
   </head>
   <body>
     <script>
-      let age = prompt("Input your age", "나이를 입력해주세요");
+      //프롬프트는 반환값이 문자열이므로 +를 넣어 숫자형으로 형변환시켜줘야한다
+      let number1 = +prompt("첫 번째 숫자를 입력해주세요");
+      let number2 = +prompt("두 번째 숫자를 입력해주세요");
 
-      let welcome = age < 18 ? () => alert("Hi") : () => alert("Hello");
+      let plus = (a, b) => a + b;
+      let minus = (a, b) => a - b;
+      let devide = (a, b) => a / b;
+      let power = (a, b) => a * b;
 
-      welcome();
-
-      function age2() {
-        let welcome = age < 18 ? () => alert("Hi") : () => alert("Hello");
-      }
-      welcome();
-
-      let age3 = function () {
-        let welcome = age < 18 ? () => alert("Hi") : () => alert("Hello");
-      };
-      welcome();
+      alert(plus(number1, number2));
+      alert(minus(number1, number2));
+      alert(devide(number1, number2));
+      alert(power(number1, number2));
     </script>
   </body>
 </html>
