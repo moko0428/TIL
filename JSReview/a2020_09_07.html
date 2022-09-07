@@ -8,18 +8,21 @@
   </head>
   <body>
     <script>
-      let sayHi1 = () => alert("Hi");
-      sayHi1();
+      let age = prompt("Input your age", "나이를 입력해주세요");
 
-      function sayHi2() {
-        return alert("Hi");
+      let welcome = age < 18 ? () => alert("Hi") : () => alert("Hello");
+
+      welcome();
+
+      function age2() {
+        let welcome = age < 18 ? () => alert("Hi") : () => alert("Hello");
       }
-      sayHi2();
+      welcome();
 
-      let sayHi3 = function () {
-        return alert("Hi");
+      let age3 = function () {
+        let welcome = age < 18 ? () => alert("Hi") : () => alert("Hello");
       };
-      sayHi3();
+      welcome();
     </script>
   </body>
 </html>
