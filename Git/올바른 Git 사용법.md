@@ -246,3 +246,20 @@ $ git push origin --delete [branch_name]
   - GitHub을 통해 remote repo의 feature branch에서 직접 main branch로 병합을 수행
   - 병합을 위해서는 다른 사용자로부터 변경 내용에 대한 코드 리뷰를 받고, 지정된 사람들로부터 승인이 필요
   - remore repo에서 merge 이후에 remote repo의 main과 local repo의 main은 서로 다른 상태가 됨 -> 동기화가 필요
+
+## 풀 리퀘스트 기반 워크플로우에의 squash and merge와 rebase and merge
+
+- 풀 리퀘스트 기반 워크플로우 - github의 rebase and merge 방식(1)
+  - pull request에서의 rebase 동작은 feature에 있는 commit을 main으로 rebase를 수행하게 됨
+  - 이전 설명에서는 main의 commit을 feature로 rebase를 수행하는 방식으로 사용함
+- 풀 리퀘스트 기반 워크플로우 - github의 rebase and merge 방식(2)
+  - pull request는 feature branch에 있는 commit들을 main에 똑같이 복사하는 방식으로 rebase를 수행함
+  - rebase and merge 수행 후 feature branch는 삭제
+  - 이유
+    - 동일한 commit들을 또 복제 후 rebase 시도하며, comflict가 발생하게 됨
+    - commit 2, 5, 7과 commit 3, 6, 8은 동일
+- 풀 리퀘스트 기반 워크플로우 - github의 rebase and merge 방식(3)
+  - 실제로는 local에서 rebase 수행 시, base 이후에 feature에서 생성된 commit들은 새로운 base 이후에 복제되는 형태로 처리됨
+  - 복제 후에 기존 commit들은 feature branch에서 더 이상 보이지 않게 됨
+- 풀 리퀘스트 기반 워크플로우 - github의 sqaush and merge 방식
+  -> 쉽게 타켓 commit 뒤에 새로운 commit을 생성해서 이어붙임
