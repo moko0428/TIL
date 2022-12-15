@@ -209,3 +209,30 @@ $ git branch -D [branch_name]
 ```
 $ git push origin --delete [branch_name]
 ```
+
+## 협업에서 실패 사례 및 해결방안
+
+- local repo를 remote repo로 동기화
+  - git push의 경우 branch 단위로 동기화가 진행
+  - 이때, 기본적으로 fast-forward merge 방식으로 merge를 시도
+  - 만약, merge가 되지 않으면 push는 실패하고, 사용자가 local repo에서 remote의 최신 상태를 업데이트 한 후 직접 merge를 수행하고, 다시 push 연산으로 동기화 해야함. -> 즉, fast-forward merge가 되도록 상태를 만들어주는 것
+  - 성공적으로 진행되는 상황
+    - clone 직후 혹은 remote와 동기화 완료 후
+    - local에서 feature branch 생성 후, 작업 진행
+    - local에서 main branch로 merge 수행
+    - local repo의 main branch를 origin의 main branch로 동기화(local->remote)
+  - 실패하는 상황 및 해결방안 (1)
+    - clone 직후 혹은 remote와 동기화 완료 후
+    - local에서 feature branch 생성 후, 작업 진행
+    - local에서 main branch로 merge 수행
+    - 다른 개발자가 작업 내용을 main branch에 반영
+    - local repo의 main branch를 origin의 main branch로 동기화(local -> remote)
+    - 동기화 (git push 명령어) 실패 후
+    - origin/main과 main을 merge 수행
+    - 다시 local repo의 main을 origin의 main과 동기화 수행
+  - 실패하는 상황 및 해결방안 (2)
+    - push로 동기화 실패 후 git fetch 실행
+    - rebase를 통해 origin/main을 새로운 base로 지정
+    - git push로 반영
+- remote repo를 local repo로 동기화
+  - git fetch의 경우 모든 branch에 대해서 새로운 내용을 update 수행
