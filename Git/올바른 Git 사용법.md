@@ -274,3 +274,115 @@ $ git push origin --delete [branch_name]
   - 메인 기반 워크플로우에 비해 협업을 위한 절차가 추가됨
   - feature branch의 개발 내용을 리뷰 후 merge 할때까지 시간이 길어져 전체적인 개발시간이 길어질 수 있음
   - merge 하는 과정에서 다른 사람의 승인을 필요로 하므로 메인 기반 워크플로우에 비해 문제가 발생할 가능성을 줄일 수 있음
+
+## 9주차 퀴즈
+
+1.  Commit에 포함되는 내용들을 지칭하는 용어로 변경대상을 의미하는 단어를 작성하시오.
+
+        Changeset
+
+    > commit하려는 대상 (Stage(반영대상)에 들어갈 파일들을 결정)
+
+2.  workspace와 stage, repo에 위치한 동일한 파일 상태는 세 위치 모두에서 각각 다 다를 수 있다.
+
+    참
+
+3.  Local repo의 내용을 remote repo에 동기화 하기 위해 사용하는 명령어는 무엇인가?
+
+    git push
+
+4.  branch는 git에서 실제로는 단순한 [ ]역할을 수행하며, 해당 branch에서 새로운 commit이 발생할 때마다 최신 commit을 가리키도록 갱신된다.
+
+    포인터
+
+5.  현재 내가 작업 중인 branch를 가리키는 포인터의 이름은 무엇인가?
+
+    HEAD
+
+## 10주차 퀴즈
+
+1. Merge를 수행하는 과정에서 분기가 발생한 base를 기준으로, 병합하려는 두 branch에 동시에 존재하는 file의 특정 내용을 서로 다른 내용으로 수정한 경우 git에 의해 자동으로 merge가 되지 않는 것을 의미하는 용어를 쓰시오.
+
+   Merge conflicts
+
+2. git에서 특정 commit을 가리키는 ID는 무엇이라 하는가?
+
+   Revision
+
+3. 아래 그림과 같은 repo가 있다. featureA 브랜치를 main 브랜치에 병합할 때, git에서 사용하는 병합 방식은 무엇인가?
+
+   Fast-forward merge
+
+4. 아래와 같은 상태의 repo가 있다. featureA 브랜치를 main 브랜치에 병합한 후, main 브랜치에 포함될 commit 개수는 총 몇 개인가?
+
+   5개
+
+5. "Fast-Forward merges에서는 merge conflict가 발생할 수 있다."
+
+   거짓
+
+## 11주차 퀴즈
+
+1. Local repo를 clone한 원천이 되는 remote repo를 참조하기 위해 사용되는 포인터의 이름은?
+
+   origin
+
+2. origin/head는 clone 시점의 remote repo의 default branch를 가리키는 포인터다.
+
+   참
+
+3. Local repo에서 ( )은 clone할 당시의 remote repo의 main branch를 의미한다.
+
+   origin/main
+
+4. featureA branch의 내용을 하나의 commit으로 묶어서 main branch에 병합하려고 한다.
+
+git ( ) featureA main
+
+merge --squash
+
+5. git rebase [target_name]
+
+## 12주차 퀴즈
+
+1.  다음 중 local repo의 branch를 remote repo와 동기화 할 때, 이 merge 방식일 경우 자동으로 성공하게 되는데, 이 merge 방식은 무엇인가?
+
+    fast-forward
+
+2.  다음 중 remote repo에서 삭제된 branch의 정보를 local repo에서도 삭제하기 위해서 origin/branch명 포인터를 제거하는데 사용되는 명령어는 무엇인가?
+
+    git fetch --prune
+
+3.  HEAD가 main을 가리키고 있을 때, origin/main을 main으로 merge하기 위해서 사용되는 명령어
+
+    git merge origin/main
+
+4.  병합하려는 두 branch에서 원천에 해당하는 branch에 대상이 되는 branch의 commit history가 모두 포함되어 있는 상태라면, fast-forward merge 방식으로 병합이 된다.
+    git push를 통해 동기화 실행 시, fast-forward 방식일 경우에만 정상적으로 merge가 수행된다.
+    git push 수행 시 실패했다면, git fetch를 통해 remote repo의 변경된 내용을 가져와서 직접 확인해봐야 한다.
+
+        push가 성공하고, local repo와 remote repo의 상태가 동일해진다.
+
+## 13주차 퀴즈
+
+1. 개발자가 새로운 기능을 개발할 때, branch를 생성해서 작업을 수행하고 기능 개발이 완료된 후에 local repo의 main branch로 병합 후, 이를 remote repo와 동기화 하는 workflow 방식을 무엇이라고 하는가?
+
+   메인 기반 워크플로우
+
+2. GitHub과 같은 관리 시스템을 통해 remote repo의 feature branch에서 직접 main branch로 병합을 수행하고, 이때 병합을 위해서는 다른 사용자로부터 변경 내용에 대한 코드 리뷰를 받고, 지정된 사람들로부터 승인이 필요한 workflow 방식을 무엇이라고 하는가?
+
+   풀 리퀘스트 기반 워크플로우
+
+3. github의 pull request를 통해 feature branch에서 main branch로 merge를 수행할 때, 아래 그림의 좌측 그림에서 우측 그림으로 변환하기 위해 사용되는 merge 방식은 무엇인가?
+
+   rebase and merge
+
+4. git rebase main 명령어 수행 시, commit 3번의 commit ID만 달라지고 나머지 모두 동일한 값을 유지한다.
+
+   거짓
+
+5. github의 pull request를 통해 feature branch를 main branch로 merge하는 과정을 표현한 것이다. 좌측에서 우측으로 변환하기 위해 사용되는 merge 방식은 무엇인가?
+
+   squash and merge
+
+6. 메인 기반 워크플로우는 협업을 위한 절차가 매우 간편하고, 개인 개발자가 직접 feature branch의 내용을 main으로 merge할 수 있어 작업 진행이 빠르다., 풀 리퀘스트 기반 워크플로우는 메인 기반 워크플로우에 비해 협업을 위한 절차가 추가된다.
