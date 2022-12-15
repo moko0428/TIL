@@ -129,3 +129,36 @@ $ git merge featureA
   - 두 branch의 변경사항을 직접 비교하여 editor를 이용해 수정
   - 이를 바탕으로, 서로 다른 변경사항을 적절히 합쳐서 conflict를 해결해야함.
   - 서로 다른 line이라고 하더라도, 변경이 발생한 라인 간에 한 줄 이상 차이가 있어야 conflict가 발생하지 않음
+
+## Git을 이용한 협업
+
+- Git repo를 local PC에 clone하면 remote repo를 그대로 복사해서 download하는 것과 동일함
+- Local repo에서 clone을 수행한 remote repo를 origin이라는 이름으로 참조하게됨
+- clone 직후에는 workspace가 clean 상태이며, main branch는 remote와 동일한 상태를 갖고 있음.
+- git log 명령어를 통해 clone 할 당시 시점의 origin(==remote repo)의 main branch의 commit을 확인 가능
+- origin/HEAD는 origin에 설정된 default branch를 가리킴
+  - Local repo의 HEAD 포인터와 다른 역할
+- local repo에서 생성한 branch를 remote repo에 upload하는 방법
+
+```
+$ git push <remote repo> <branch name>
+$ git push origin featureA
+```
+
+- local repo는 origin/main과 origin/HEAD는 clone할 당시 시점의 값을 저장하고 있음.
+- local repo에서 작업을 하는 동안 다른 개발자들이 main branch에 git push로 변경사항을 반영하면, remote의 실제 main branch가 가리키는 commit은 변경되지만, 사용자 A Local PC의 origin/main은 그대로 유지
+- remote repo에 변경된 내용을 다시 local repo로 동기화 해야 origin/main이 현재 remote repo의 상태와 동일해짐
+
+- Git commit history의 형태로 local repo와 remote repo 동기화 흐름 살펴보기
+
+1. clone 직후
+   -> remote에선 commit 1을 보고 있고 local에서도 commit 1을 보고 있다.
+
+2) remote에 다른 개발자로부터 변경사항 반영된 이후
+   -> remote는 새로운 commit 2를 보고 있고 local은 아직 반영되지 않아서 그대로 commit 1을 보고 있음.
+
+3) git fetch 명령어로 remote에 변경된 내용을 local repo에 동기화한 후
+   -> remote는 그대로 commit2를 보고 있고 local은 새로 반영된 commit2를 보고 있다.
+
+4) git merge 명령어로 origin/main의 내용을 main에 반영한 이후
+   -> remote는 commit2를 local은 merge가 되어 main과 origin/main 모두 commit2를 보고 있다.
