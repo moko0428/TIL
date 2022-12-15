@@ -193,3 +193,19 @@ $ git push origin featureA
     - squash는 joint commit이 아닌, 완전히 별도의 commit을 생성하게 됨 -> squash는 새로운 commit을 생성해서 거기다 반영을 하고
       Three-way 는 중간 저장된 commit 위치의 뒤에 반영이 된다.
     - git log를 통해 확인 가능
+
+## branch 삭제
+
+- local branch 삭제
+
+```
+$ git branch -D [branch_name]
+```
+
+- remote branch 삭제
+  - remote에 영향을 미치게 하기 위해서는 항상 동기화 방식을 사용해야함.
+  - git push 명령어를 통해 local에서 삭제된 origin/feature branch가 remote에서도 삭제되도록 동기화
+
+```
+$ git push origin --delete [branch_name]
+```
