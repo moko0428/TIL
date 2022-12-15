@@ -236,3 +236,13 @@ $ git push origin --delete [branch_name]
     - git push로 반영
 - remote repo를 local repo로 동기화
   - git fetch의 경우 모든 branch에 대해서 새로운 내용을 update 수행
+
+## 메인 기반 워크플로우(Main based workflow)와 풀 리퀘스트 기반 워크플로우(Pull Request based workflow)
+
+- 메인 기반 워크플로우
+  - 개발자가 새로운 기능을 개발할 때, branch를 생성해서 작업을 수행하고, 기능 개발이 완료된 후에 local repo의 main branch로 병합 후, 이를 remote repo와 동기화하는 방식(지금까지 배운 내용)
+  - local repo와 remote repo 동기화 실패 시, merge 수행 후 다시 동기화해야 함
+- 풀 리퀘스트 기반 워크플로우
+  - GitHub을 통해 remote repo의 feature branch에서 직접 main branch로 병합을 수행
+  - 병합을 위해서는 다른 사용자로부터 변경 내용에 대한 코드 리뷰를 받고, 지정된 사람들로부터 승인이 필요
+  - remore repo에서 merge 이후에 remote repo의 main과 local repo의 main은 서로 다른 상태가 됨 -> 동기화가 필요
