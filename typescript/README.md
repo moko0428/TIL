@@ -52,3 +52,164 @@ const message: string = "hello world";
 ```
 
 타입스크립트는 message: string 처럼 해당 상수 값이 문자열이라는 것을 명시해준다.
+
+### 기본 타입
+
+let과 const를 사용하여 특정 값을 선언 할 때 여러가지 기본 타입을 지정하여 선언
+
+```ts
+let count = 0; //숫자
+count += 1;
+const = 'hello'; //type error
+
+const message: string = 'hello world'; //문자열
+
+const done:boolean = true; //불리언 값
+
+const numbers: number[] = [1,2,3]; //숫자 배열
+const messages: string[] = ['hello', 'world']; //문자열 배열
+
+messages.push(1); //문자열 배열에 숫자를 넣으려 하므로 error!
+
+let mightBeUndefined: string | undefined = undefined; //string 일수도 있고 undefined 일수도 있고
+let nullableNumber: number | null = null; //number 일수도 있고 null 일수도 있고
+
+let color: 'red' | 'orange' | 'yellow' = 'red'; //red, orange, yellow 중 하나
+color = 'yellow';
+color = 'green'; //에러 발생
+```
+
+### 함수에서 타입 정의하기
+
+```ts
+function sum(x: number, y: number): number {
+  return x + y;
+}
+
+sum(1, 2);
+```
+
+x: number, y: number는 각각 number 타입이라는 것을 명시한 것이다.
+): number는 해당 함수의 결과물이 number 타입이라는 것을 명시한다.
+
+#### 숫자 배열의 총합을 구하는 sumArray 함수 만들어보기
+
+```ts
+function sumArray(numbers: number[]): number {
+  return numbers.reduce((acc, cur) => acc + cur, 0);
+}
+const total = sumArray([1, 2, 3, 4, 5]);
+```
+
+여기서 타입스크립트의 장점 중 하나인 타입 추론이 가능한 것을 볼 수 있다. acc를 눌러보면 배열의 내장 함수의 타입을 유추할 수 있게 (parameter) cur:number라고 알려준다.
+
+만약 함수에서 아무것도 변환하지 않아야 한다면 반환 타입을 void로 설정하면 된다.
+
+```ts
+function returnNothing(): void {
+  console.log("I am just saying hello world");
+}
+```
+
+### interface 사용해보기
+
+클래스 또는 객체를 위한 타입을 지정할 때 사용되는 문법이다.
+
+#### 클래스에서 interface를 implements 하기
+
+클래스를 만들 때, 특정 조건을 준수해야 함을 명시하고 싶을 때 interface를 사용하여 클래스가 가지고 있어야 할 요구사항을 설정한다. 그리고 클래스를 선언할 때 implements 키워드를 사용하여 해당 클래스가 특정 interface의 요구사항을 구현한다는 것을 명시한다.
+
+```ts
+interface Shape {
+  getArea(): number; //Shape interface 에는 getArea 라는 함수가 꼭 있어야 하며 해당 함수의 반환값은 숫자
+}
+
+class Circle implements Shape {
+  // `implements` 키워드를 사용하여 해당 클래스가 Shape interface 의 조건을 충족하겠다는 것을 명시
+
+  radius: number; // 멤버 변수 radius 값을 설정
+
+  constructor(radius: number) {
+    this.radius = radius;
+  }
+
+  // 너비를 가져오는 함수를 구현
+  getArea() {
+    return this.radius * this.radius * Math.PI;
+  }
+}
+
+class Rectangle implements Shape {
+  width: number;
+  height: number;
+  constructor(width: number, height: number) {
+    this.width = width;
+    this.height = height;
+  }
+  getArea() {
+    return this.width * this.height;
+  }
+}
+
+const shapes: Shape[] = [new Circle(5), new Rectangle(10, 5)];
+
+shapes.forEach((shape) => {
+  console.log(shape.getArea());
+});
+```
+
+constructor 코드를 보면
+
+```ts
+width: number;
+  height: number;
+  constructor(width: number, height: number) {
+    this.width = width;
+    this.height = height;
+  }
+```
+
+이렇게 width, height 멤버 변수를 선언한 다음에 constructor에서 해당 값들을 하나하나 설정해주었는데, 타입스크립트에서는 constructor의 파라미터 쪽에 public 또는 private accessor를 사용하면 직접 하나하나 설정해주는 작업을 생략해줄 수 있다.
+
+```ts
+// Shape 라는 interface 를 선언
+interface Shape {
+  getArea(): number; // Shape interface 에는 getArea 라는 함수가 꼭 있어야 하며 해당 함수의 반환값은 숫자
+}
+
+class Circle implements Shape {
+  // `implements` 키워드를 사용하여 해당 클래스가 Shape interface 의 조건을 충족하겠다는 것을 명시
+  constructor(public radius: number) {
+    this.radius = radius;
+  }
+
+  // 너비를 가져오는 함수를 구현
+  getArea() {
+    return this.radius * this.radius * Math.PI;
+  }
+}
+
+class Rectangle implements Shape {
+  constructor(private width: number, private height: number) {
+    this.width = width;
+    this.height = height;
+  }
+  getArea() {
+    return this.width * this.height;
+  }
+}
+
+const circle = new Circle(5);
+const rectangle = new Rectangle(10, 5);
+
+console.log(circle.radius); // 에러 없이 작동
+console.log(rectangle.width); // width 가 private 이기 때문에 에러 발생
+
+const shapes: Shape[] = [new Circle(5), new Rectangle(10, 5)];
+
+shapes.forEach((shape) => {
+  console.log(shape.getArea());
+});
+```
+
+public accessor는 특정 값이 클래스의 코드 밖에서도 조회 가능하다는 것을 의미한다. 예를 들어 circle.width 이런 식으로 코드를 작성하면 해당 값을 바로 조회할 수 있다. 반면에 rectangle.width를 조회 하려고 하면 컴파일 단계에서 에러가 발생한다. 위 코드를 작성 후 npm run build를 하면 컴파일 에러가 날 것이다.
