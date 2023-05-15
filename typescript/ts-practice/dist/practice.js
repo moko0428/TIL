@@ -1,3 +1,5 @@
 "use strict";
-const message = "hello world";
-console.log(message);
+function sum(x, y) {
+    return x + y;
+}
+sum(1, 2);
