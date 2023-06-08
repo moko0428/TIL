@@ -4,6 +4,10 @@
 
 Recoil은 메타(구 페이스북)에서 만든 상태 관리 라이브러리이다. 기존의 Redux와 같은 상태 관리 라이브러리들은 store 구성을 위해 많은 boilerplate 코드들을 필요로 했고, 이로 인하여 설정이 복잡해지게 되었다. Recoil은 이러한 문제의 해결과 전역 상태 관리의 최적화 및 성능과 효율성 향상을 위해 만들어졌다. 또한 React를 공식적으로 지원하는 상태 관리 라이브러리이기 때문에 React 내부에 접근이 가능하며 Concurrent 모드, Suspense 등을 손쉽게 사용할 수 있다.
 
+## 1-1. Redux란?
+
+## 1-2. Redux와 Recoil의 차이점
+
 ## 2. Recoil의 특징
 
 - atom : Recoil에서 상태를 정의하는 개념. (Redux의 store와 유사한 개념)<br>
