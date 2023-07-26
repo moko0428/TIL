@@ -59,6 +59,8 @@
 - id는 body 안에 어떤 태그에든 넣을 수 있는 속성
 - id : unique identifier(고유식별자)
 - 태그는 하나의 id만 가질 수 있다.
+- label엔 `for`, input엔 `id`를 넣어주되, 같은 이름을 사용해야한다.
+  - for, id를 넣어주면 label을 클릭해도 같은 이름을 쓰는 input이 포커싱된다.
 
 # 2.10 Semantic HTML
 
