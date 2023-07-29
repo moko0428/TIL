@@ -157,3 +157,47 @@ span {
 - `>` 는 바로 밑 자식을 찾는 것.
 - `+` 는 형제를 찾는 것.
 - `~` moko를 가지고 있는 span이 p의 형제인데 바로 뒤에 오지 않을 때 사용.
+
+# 3.16 State
+
+- F12 개발자 도구를 열어보면 Styles-state가 있다.
+  - active : 마우스 클릭 시
+  - focus : 키보드로 선택 되었을 때
+  - hover over : 마우스를 올렸을 때
+  - visited : 링크에 적용된다. 방문했던 링크에 효과
+  - focus within : 부모 엘리먼트에 적용해야하며, 자식 엘리먼트가 focus될 때 효과
+
+# 3.17 Colors and Variables
+
+- color는 3가지 방법으로 표현이 가능하다.
+- 16진수 : #000000
+- rgb : 디자이너가 자주 사용 rgb(255,255,255)
+  - rgba : a는 투명도를 나타냄. rgba(255,255,255, 0.2) 투명0 불투명1
+- :root 엘리먼트에 변수를 추가하기
+  - :root는 기본적으로 모든 document의 뿌리가 된다.
+  - value는 --, -으로 이름을 지정해야 된다.
+  ```css
+  :root {
+    --main-color: #000000;
+    --default-border: 1px solid var(--main-color);
+  }
+  div {
+    color: var(--main-color);
+  }
+  ```
+
+# 요약
+
+- pseudo element들은 :(콜론)이 2개이다.
+
+  - ::placeholder : placeholder의 특성만 바꿀 때
+  - ::selection : 드래그할 때
+  - ::first-letter : 첫 글자
+  - ::first-line : 첫 줄
+
+- state
+- active : 클릭할 때
+- hover : 마우스 커서를 올렸을 때
+- focus : 키보드로 선택 했을 때
+- visited : 방문했던 사이트 링크
+- focus-within : 자식 엘리먼트 중에 focus되면 this 효과
