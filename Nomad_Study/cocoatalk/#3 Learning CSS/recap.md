@@ -91,3 +91,69 @@ span {
 - block box들을 수직으로 옮긴다.
 - 주축(main axis), 교차축(cross axis)가 있다.
   - 자식 엘리먼트에서 justify-content(주축), align-items(교차축)으로 box를 옮길 수 있다.
+
+# 3.12 Fixed
+
+- position의 속성 중 하나.
+- 화면에 고정이 된다.
+- 레이어의 위치가 달라진다. (기존에 있던 컨텐츠는 레이어가 1이라면 Fixed가 된 컨텐츠는 2가 된다. 즉, 위로 올라온다는 뜻)
+- margin의 영향을 받지 않고 top, bottom, left, right의 영향을 받는다.
+
+# 3.13 Relative Absolute
+
+- position: static은 레이아웃이 박스를 처음 위치하는 곳에 두는 것.
+- position: relative는 가끔 조금씩 오른쪽, 왼쪽으로 옮기고 싶을 때 사용
+
+  - element가 처음 위치한 곳을 기준으로 수정.
+
+- position: absolute는 body(기본값은) 엘리먼트를 기준으로 위치를 수정할 수 있다.
+  - 원하는 부모 엘리먼트를 정하고 싶을 땐 부모 엘리먼트에 position:relative를 넣어준다.
+
+# 3.14 Pseudo Selectors
+
+- 좀 더 세부적으로 엘리먼트를 선택해주는 것.
+- id는 #, class는 .을 사용한다.
+- div`:`을 사용.
+
+  - 여러 div 중 마지막 div에게 배경색을 blue로 준다.
+    ```css
+    div:last:child {
+      background-color: blue;
+    }
+    ```
+  - div:nth-child(2) = 두번째 div을 적용
+  - div:nth-child(even) = 짝수 번째 div을 적용
+  - div:nth-child(odd) = 홀수 번째 div을 적용
+  - div:nth-child(2n+1) = 두번째 다음 마다 적용
+
+## 3.14.1 attribute selector
+
+- attribute를 통해 어떤 것이든 선택할 수 있게 해준다.
+- placeholder가 "username"인 것을 선택하기
+
+  `input[placeholder="username"]{}`
+
+- placeholder에 "name" 이라는 단어가 `포함`한 모든 input의 배경색 선택하기 `~`
+
+  `input[placeholder~="name"]`
+
+- com로 끝나는 웹사이트 링크 선택하기
+
+  `a[href$=".com"]`
+
+# 3.15 Combinators
+
+```html
+<div>
+  <span>hello</span>
+  <p>asdasdasdasd<span>inside</span>
+  <address>hi</address>
+  <span>moko<span>
+</div>
+```
+
+- 이런식으로 p안에 있는 span을 선택하는 방법은
+  `p span {}`으로 선택할 수 있다.
+- `>` 는 바로 밑 자식을 찾는 것.
+- `+` 는 형제를 찾는 것.
+- `~` moko를 가지고 있는 span이 p의 형제인데 바로 뒤에 오지 않을 때 사용.
