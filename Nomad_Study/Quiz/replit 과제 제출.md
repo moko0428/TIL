@@ -7,3 +7,5 @@
 > [8일차 - Time To Practice!](https://replit.com/@moko0428/mokonomad8)
 
 > [9일차 - Time To Practice!](https://replit.com/@moko0428/mokonomad8)
+
+> [12일차](https://replit.com/@moko0428/moko12)
