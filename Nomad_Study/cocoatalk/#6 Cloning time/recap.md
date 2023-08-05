@@ -85,3 +85,18 @@
 # 6.11 User Components
 
 - 사진 비율 유지 : object-fit:cover;
+
+# 6.12 Chats Screen
+
+# 6.13 Find Screen
+
+# 6.14 More Screen
+
+# 6.15 Settings Screen
+
+- header에서 justify-content:space-btween; 다른 방법
+- center로 두고, margin-right:auto, margin-left:auto를 준다.
+
+# 6.16 Chat Screen
+
+- z-index : 절대적인 위치(absolute posiotion)나 고정된 위치(fixed position)에 대해서 설정할 수 있다.
