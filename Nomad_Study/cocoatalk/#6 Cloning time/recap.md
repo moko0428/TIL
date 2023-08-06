@@ -100,3 +100,18 @@
 # 6.16 Chat Screen
 
 - z-index : 절대적인 위치(absolute posiotion)나 고정된 위치(fixed position)에 대해서 설정할 수 있다.
+
+- border-top-left-radius: 0px 왼쪽 위 모서리만 0px가 된다.
+
+# 6.17 Splash Screen
+
+- 애니메이션은 동작이 끝나면 초기값으로 돌아가는데, 이를 막는 방법은 forwards를 넣는 것이다.
+  - forwards는 마지막 속성 값(final property value)은 마지막 keyframes로 정해지고 애니메이션이 끝나고 유지된다.
+
+# 6.18 More Animations
+
+- will-change : 브라우저에게 렌더링 힌트를 주고, element에 실행 되길 기대하는 변화를 명시한다.
+
+# 6.19 No Mobile Media Query
+
+- media : 화면의 크기에 따라 화면이 어떻게 보여질지를 정할 수 있다.
