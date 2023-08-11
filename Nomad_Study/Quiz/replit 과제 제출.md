@@ -9,3 +9,5 @@
 > [9일차 - Time To Practice!](https://replit.com/@moko0428/mokonomad8)
 
 > [12일차](https://replit.com/@moko0428/moko12)
+
+> [19일차](https://codesandbox.io/s/nomad-moko-19-2tn5k3?file=/src/index.js)
