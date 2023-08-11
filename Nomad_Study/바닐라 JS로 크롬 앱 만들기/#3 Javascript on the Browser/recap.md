@@ -108,3 +108,101 @@ title.addEventListener("click", handleTitleClick);
 body에 해당되는 것들을 event listen 할 수 있게 만든다.
 
 - resize, wifi on/off 등
+
+# 3.5 CSS in Javascript
+
+- js로 css 사용하기
+
+## 예제
+
+- click 이벤트로 title 색 바꾸기
+
+```js
+const h1 = document.querySelector("div.hello:first-child h1");
+
+function handleTitleClick() {
+  if (h1.style.color === "blue") {
+    h1.style.color = "tomato";
+  } else {
+    h1.style.color = "blue";
+  }
+}
+h1.addEventListener("click", handleTitleClick);
+```
+
+- refactor
+
+```js
+const h1 = document.querySelector("div.hello:first-child h1");
+
+function handleTitleClick() {
+  const currentColor = h1.style.color;
+  let newColor;
+  if (currentColor === "blue") {
+    newColor = "tomato";
+  } else {
+    newColor = "blue";
+  }
+  h1.style.color = newColor;
+}
+h1.addEventListener("click", handleTitleClick);
+```
+
+## 3.5.1 JS로 HTML 코드에 CSS 전달하기
+
+```css
+.clicked {
+  color: blue;
+}
+```
+
+```js
+function handleTitleClick() {
+  if (h1.className === "clicked") {
+    h1.className = "";
+  } else {
+    h1.className = "clicked";
+  }
+}
+```
+
+- string으로 값을 할당할 때 반복되는 것이 있다면 오타의 위험이 있다.
+- 반복되는 string 값을 변수로 만들어 사용 권장.
+
+```js
+function handleTitleClick() {
+  const clickedClass = "clicked";
+  if (h1.className === clickedClass) {
+    h1.className = "";
+  } else {
+    h1.className = clickedClass;
+  }
+}
+```
+
+## 3.5.2 클래스 추가
+
+- className은 모든걸 교체해버린다. 이전의 class들은 상관하지 않고,,
+- 그래서 classList를 사용한다.
+- contains : 명시한 class가 HTML element의 class에 포함되어 있는가를 뜻함.
+- classList.add() : 말그대로 클래스리스트에 명시한 class를 추가한다.
+- classList.remove() : 명시한 class를 삭제한다.
+
+```js
+function handleTitleClick() {
+  const clickedClass = "clicked";
+  if (h1.classList.contains(clickedClass)) {
+    h1.classList.remove(clickedClass);
+  } else {
+    h1.classList.add(clickedClass);
+  }
+}
+```
+
+- 이 작업을, 코드 5줄을 한줄로 표현할 수 있다면?
+
+```js
+function handleTitleClick() {
+  h1.classList.toggle("clicked");
+}
+```
