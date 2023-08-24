@@ -426,3 +426,41 @@ const logger = (req, res, next) => {
 - 대부분 마지막 함수가 응답하게 된다.
 - 관습적으로, 응답을 해주는 마지막 컨트롤러는 next를 안쓴다.
 - app.use() : global middleware
+
+# 3.4 External Middlewares
+
+- morgan : node.js 용 request logger middleware
+- morgan을 사용하는 방법은 기존에 직접 만들어서 쓰던 middleware를 사용하는 방법과 유사하다.
+
+## 3.4.1 morgan 사용방법
+
+- 먼저 morgan 함수를 호출해서 함수를 설정해준다.
+- morgan 함수를 호출하면, 우리가 설정한 대로 middleware를 return 해준다.
+- app.use()를 사용하고, morgan을 import 한다.
+
+```js
+import morgen from "morgan";
+...
+app.use(morgen("dev")) // dev, short, tiny, common, combined 총 다섯 가지
+```
+
+- logger 함수를 호출하면, 다섯 가지 옵션이 있다.
+- 위의 코드를 다르게 변형하면 아래와 같다.
+
+```js
+import morgen from "morgan";
+const logger = morgen("dev");
+...
+app.use(morgen(logger))
+```
+
+> 🤔 그렇다면 기존의 logger와 morgan의 차이점은 뭘까?
+
+- 차이점은 morgan이 좀 더 정교하다는 것.
+- morgan은 GET, path, status code, 이 모든 정보를 가지고 있다.
+- 위의 코드를 실행해보면, GET, /login, status code, 응답시간을 가지고 있다는 것을 확인할 수 있다.
+- conbined : 시간, method, http 버전, 사용중인 브라우저, os 등 많은 것을 보여준다.
+
+> 🤔 그럼 morgan은 next()가 있을까?
+
+- morgan("dev")를 호출하면 req, res, next를 포함한 함수를 return 해준다.
