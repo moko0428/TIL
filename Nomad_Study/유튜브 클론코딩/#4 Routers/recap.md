@@ -427,3 +427,168 @@ videoRouter.get("/edit", edit);
 
 export default videoRouter;
 ```
+
+- 만드는 순서
+
+1. server(index).js 에 app.use()로 라우터를 불러준다.
+2. routers/globalRuter.js 로 컨트롤러를 불러준다.
+3. 컨트롤러를작성한다.
+
+## 요약
+
+```
+/ -> Home
+/join -> Join
+/login -> Login
+/search -> Search
+
+/users/edit -> Edit user
+/users/delete -> Delete user
+
+/videos/watch -> Watch Video
+/videos/edit -> Edit Video
+/videos/delete -> Delete Video
+/videos/comments -> Comment on a video
+/videos/comments/delete -> Delete A Comment of a Video
+
+```
+
+- 우리는 server.js에서 app.get()을 더 이상 쓰지 않는다.
+- 우리는 이제 app.use()를 사용한다.
+- 왜냐? 앞으로의 계획으로 미래를 보았을 때, URL을 그룹으로 정리하지 않으면 힘들어질거라는 것을 몸으로 알게 되기 전에 그룹화를 시켜준다.
+- 그리고 우리는 도메인에 기반해서 그룹을 골랐다.
+  - users, videos를 제외하고는 다른 그룹은 깔끔한 url이다.
+  - 만약 이렇게 그룹을 정리하지 않으면 /comment-on-video 같은 케이스가 생긴다.
+- 그래서 대신에 우리는 라우터를 사용했다.
+- 라우터는 URL이 어떻게 시작하는지에 따라 나누는 방법이다.
+- "/"만 있는 url이 있다. "/"로 시작하면 global Router로 가게 된다.
+- "/users"로 시작하는 것은 user Router로 간다.
+- "/videos"로 시작하는 것은 video Router로 간다.
+
+# 4.4 Architecture Recap
+
+### export와 import에 관하여..
+
+- **뭔가를 import 하기 전에는 반드시 export를 해야한다.**
+- wetube의 폴더에 있는 모든 js 파일은 독립되어 있다.
+- export는 모듈 내보내기, import는 모듈 가져오기
+
+### export와 export default에 관하여..
+
+- export default는 한가지만 내보낼 수 있다.
+  - 한 가지만 내보낼 수 있기 때문에 변수명을 바꾸어서 불러올 수 있다.
+  - `import globalRouter from "routers/globalRouter";`
+- export는 한 파일 내에서 여러 개의 변수를 내보낼 수 있다.
+  - 한 파일 내에서 여러 개의 변수를 내보내기 때문에 변수명을 똑같이 작성해야 하며 불러올 땐 {}안에 작성해야 한다.
+  - `import {join} from "../controllers/userController";`
+
+# 4.5 Planning Routes
+
+```
+/ -> Home
+/join -> Join 계정이 없다면 회원가입
+/login -> Login 있다면 로그인
+/search -> Search 그 다음에 영상을 검색
+
+/users/:id -> See User
+/users/logout -> Log Out
+/users/edit -> Edit My Profile
+/users/delete -> Delete My Profile
+
+/videos/:id -> See Video
+/videos/:id/edit -> Edit Video
+/videos/:id/delete -> Delete Video
+/videos/upload -> Upload Video
+```
+
+# 4.6 URL Parameters
+
+- :id : 여기서 중요한 건 `":"`이다. :moko여도 상관없고, `":"` 이것이 의미하는 것이 중요하다.
+- : 이것을 파라미터라고 불린다. argument, variable 등 아무거나 쓸 수 있다.
+- 포인트는 이걸로 url 안에 변수를 포함시킬 수 있게 해준다는 것.
+- 노마드의 영상을 보면 주소창에 "nomadcoders.co/wetube/lectures/숫자"로 되어 있는게 보인다. 이 숫자가 바로 변수
+- 만약에 : 이 파라미터가 없어서 주소에 변수를 넣지 못했다면, 모든 영상마다 라우터를 새로 만들었어야 했다.
+- 파라미터는 url 안에 변수를 넣는 것을 허용해준다.
+- 이걸 코드에서 어떻게 액세스하는지 보여주기
+  - see 컨트롤러로 간단히 예시를 들어보자.
+
+```js
+// videoRouter
+videoRouter.get("/:potato/watch", see);
+```
+
+```js
+// videoController.js
+export const see = (req, res) => {
+  console.log(req.params);
+  return res.send("Watch");
+};
+```
+
+- 주소창에 /videos/12121212로 가보면 Watch가 출력된다.
+- console을 보면 {potato: "12121212"} potato의 넘버가 출려된다.
+
+- 브라우저엔 Watch Video #숫자 가 출력된다.
+- 보다시피 우리는 뭔가를 하기 위해 request object를 쓰고, response를 받아온다.
+
+> 🤔 그럼 왜 upload를 id 위에 두었을까?
+
+```js
+videoRouter.get("/upload", upload);
+videoRouter.get("/:id", see);
+videoRouter.get("/:id/edit", edit);
+videoRouter.get("/:id/delete", deleteVideo);
+```
+
+```js
+export const see = (req, res) => {
+  return res.send(`Watch Video #${req.params.id}`);
+};
+```
+
+- 이상태에서 주소창에 /videos/12121212로 가보면 Watch Video #12121212가 출력된다.
+
+- 이것을 알아보기 위해 문제를 만들어보자.
+
+```js
+videoRouter.get("/:id", see);
+videoRouter.get("/upload", upload);
+videoRouter.get("/:id/edit", edit);
+videoRouter.get("/:id/delete", deleteVideo);
+```
+
+```js
+export const see = (req, res) => {
+  return res.send(`Watch Video #${req.params.id}`);
+};
+```
+
+- 이 상태에서 /videos/upload를 가게 되면
+
+- `Watch Video #upload`가 되어버린다.
+
+- 어떻게 된 일이냐, express가 request를 받고 있는데, express는 /:id를 먼저보고 /upload가 id 자리에 있으니, id라고 생각해버리는 것이다.
+- 그래서 upload가 있어도 여기까지 보러가지도 않고 멈춰버리는 것이다.
+  > 🤔 그렇다면 다시 upload를 :id 위에 올리게 된다면 어떻게 될까?
+- upload가 출력되게 된다.
+- 왜냐하면 request는 제일 위에 있는 것을 먼저 보기 때문.
+- 따라서, upload 같이 :변수가 생성되지 않는 url은 맨 위에 보내자.
+
+# 4.6 URL Parameters 2
+
+- 이전엔 라우터의 파라미터에 대해 배웠다.
+- 무슨 문제였냐, 우리는 upload를 중간에 두면 express가 찾을 수가 없었다.
+- 왜냐하면, express가 생각하기엔 upload가 id처럼 보이니까.
+- 또 다른 문제는, 우리는 id를 숫자만 가지고 올 수 있게 만들고 싶다.
+- 해결을 위해 `"정규식"`에 대해 알아보자.
+- 정규식은 문자열로부터 특정 정보를 추출해내는 방법이다.
+- (\\d+) : 숫자만 허용한다는 표현식이다.
+
+```js
+videoRouter.get("/:id(\\d+)", see);
+videoRouter.get("/:id(\\d+)/edit", edit);
+videoRouter.get("/:id(\\d+)/delete", deleteVideo);
+videoRouter.get("/upload", upload);
+```
+
+- 이렇게 정규식을 사용해 id를 숫자만 받을 수 있게 되었고, upload를 최하단에 사용할 수 있게 되었다.
