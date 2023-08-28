@@ -15,3 +15,5 @@
 > [30일차](https://codesandbox.io/s/nomad-study-express-30-moko-l59d8r)
 
 > [31일차](https://codesandbox.io/s/nomad-study-middleware-31-7hdhc2?file=/src/server.js)
+
+> [36일차](https://codesandbox.io/s/nomad-study-36-7vd5dn?file=/src/index.js)
