@@ -248,3 +248,144 @@ head
 
 - HTML의 element(요소)들을 이쁘게 만들어주는 역할을 한다.
 - `link(rel="stylesheet" href="https://unpkg.com/mvp.css")`
+
+# 5.7 Conditionals
+
+- #{}를 붙이지 않으면 변수는 단순 텍스트로 밖에 동작을 하지 않는데, h1에 =를 붙이고 변수를 쓰면 단순 텍스트가 아닌 변수로 인식된다.
+  - h1 #{pageTitle} === h1=pageTitle
+- 하지만 h1 #{pageTitle} 이렇게 쓰지 않는 이유는 변수를 다른 text와 섞어서 쓰고 있지 않기 때문이다.
+- 즉, h1=과 같이 태그에 하나의 변수 값만 집어넣는 경우라면, 이렇게 #{}를 사용하지 않아도 된다.
+
+```js
+// 비디오 컨트롤러
+const fakeUser = {
+  username: "moko",
+  loggedIn: false,
+};
+
+export const trending = (req, res) =>
+  res.render("home", { pageTitle: "Home", fakeUser });
+```
+
+```js
+// base.pug
+ nav
+                ul
+                    if fakeUser.loggedIn
+                        li
+                            a(href="/logout") Log out
+                    else
+                        li
+                            a(href="/login") Login
+```
+
+- 이렇게 가짜 사용자가 로그아웃 상태라면 로그인이, 로그인 상태라면 로그아웃이 출력되도록 조건을 걸어줄 수 있다.
+
+# 5.8 Iteration
+
+- Iteration은 element의 list를 보여주는 것이다.
+
+```js
+export const trending = (req, res) => {
+  const videos = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  return res.render("home", { pageTitle: "Home", videos });
+};
+```
+
+- 가짜 비디오 배열을 만든다.
+- home 템플릿에 videos를 보내준다.
+
+```js
+ul
+        each video in videos
+             li=video
+```
+
+- each를 적고, 보여주고 싶은 변수 이름을 적어준다.
+- 여기서 videos array 안의 각 element에 대해서, list item을 만들어 video를 그 안에 넣어준다.
+- each "item" in "컨트롤러의 배열 이름"
+
+```js
+export const trending = (req, res) => {
+  const videos = [
+    {
+      title: "Hello",
+    },
+    {
+      title: "Video #2",
+    },
+    {
+      title: "Whatsup",
+    },
+  ];
+  return res.render("home", { pageTitle: "Home", videos });
+};
+```
+
+- pug가 이 object를 문자열로 바꾼다면 [object Object]로 보이게 된다.
+- each video in videos에서 li=video를 li=video.title로 고치게 되면 정상 작동한다.
+
+# 5.9 Mixins
+
+- mixin은 base.pug의 partials와 같은건데, 데이터를 받을 수 있는 partials을 말한다.
+
+```js
+// home
+extends base.pug
+include mixins/video
+
+block content
+
+    h2 Welcome here you will see the trending Videos
+    main
+        each potato in videos
+            +video(potato)
+        else
+            h1 Not found videos
+```
+
+```js
+// video.pug
+mixin video(info)
+     div
+        h4=info.title
+        ul
+            li #{info.rating}/5.
+            li #{info.comments} comments.
+            li Posted #{info.createdAt}.
+            li #{info.views} views.
+```
+
+- videos 안의 각각의 potato에 대해서, video라는 mixin을 호출해서 potato라는 정보 객체를 보내고 있는 것이다.
+- 그리고 그 정보 객체는 video mixin 안의 info가 될 것
+- include mixins/video으로 가져온다.
+
+# 5.10 Iteration, Mixins 복습
+
+- Iteration은 array의 모든 element에 대해 특정 행동을 취할 때 사용한다.
+
+```js
+  const videos = [
+    {
+      title: "First Video",
+      rating: 5,
+      comments: 2,
+      createdAt: "2 minutes ago",
+      views: 59,
+      id: 1,
+    },
+```
+
+- 이 경우에 비디오 컨트롤러는 videos라는 array를 보내주고 있다.
+- 그래서 each X in Y의 형태로, Y안의 각각의 X에 대해서 동일한 작업을 할 수 있다.
+- Y는 우리가 현재 가지고 있는 array를 가리킨다.
+- X는 변수로 이름은 중요하지 않다.
+- each X in Y에서 Y는 반드시 존재해야 한다.
+
+```js
+include mixins/video
+      each potato in videos
+            +video(potato)
+```
+
+- mixin은 include mixins/video 통해 사용할 수 있으며 +기호를 해줘야한다.
