@@ -113,4 +113,138 @@ html(lang="ko")
 - 우리가 서버를 시동하거나 node.js를 실행하는 건 pakage.json이다.
 - pakage.json은 src 안에 있지 않다.
 - 그렇기 때문에 express에게 현재 작업 디렉토리를 알려줘야한다.
-- 파일 경로가 잘못 설정되어 있으니 고쳐주도록 하자.
+- 해결방법은 디폴트 값을 변경해주는 것이다. 왜냐, 디폴트 값이 "현재 작업 디렉토리(cwd)/views"이니,
+- 좋지 않은 해결법 하나는, 내 views 폴더를 src 밖으로 꺼내는 것이다.
+- 좋은 해결법은 views의 설정을 바꾸어 주는 것이다.
+- `app.set("views", process.cwd() + "/src/views")`
+- pug 파일은 res.render()를 통해 렌더링할 수 있다.
+- 첫 argument는 파일 이름이 들어가는데 무조건 소문자여야 한다.
+- `res.render("home")`
+- 템플릿엔 어느 자바스크립트 코드여도 넣을 수 있다.
+
+# 5.2 Partials
+
+- pug의 최고 장점은 반복할 필요가 없다는 것.
+- views에 partials 폴더를 만들고 footer.pug 파일을 만든다.
+- 반복되었던 footer들을 지우고 footer.pug에 넣는다.
+- footer.pug를 home, watch.pug에 include 해준다.
+
+```js
+//footer.pug
+footer &copy; #{new Date().getFullYear()} Wetube
+```
+
+```js
+//home.pug, watch.pug
+...
+include partials/footer.pug
+```
+
+- 그렇다면 모든 것들을 반복하지 않는 방법이 있다면 ?
+
+# 5.3 Extending Template
+
+- inheritance(상속) : 일종의 베이스를 만들어준다. (레이아웃의 베이스, HTML의 베이스) 그러면 모든 파일들이 그 베이스에서부터 확장해 나가는 것.
+- base.pug 파일을 생성하고 home 코드를 복붙해준 뒤,
+- home, watch, edit 파일의 모든 코드를 지우고 `"extends base.pug"`를 해준다.
+- 그러면 모든 파일들이 base.pug에게서 상속받게 된다.
+- 이렇게 되면 모든 파일들이 다 똑같이 출력되기 때문에 좋지 않다.
+- 블록 : 블록은 템플릿의 창문 같은 것. 창문, 문, 공간, 블록이든지 무언가를 집어 넣을 수 있는 곳을 말한다.
+
+```js
+doctype html
+html(lang="ko")
+    head
+        title Wetube
+    body
+        block content
+    include partials/footer.pug
+```
+
+- body에 block을 넣어준다.
+- 이게 뭐냐, base.pug에 content를 위한 공간이 마련된 것이다.
+
+```js
+extends base.pug
+block content
+    h1 Home!
+```
+
+- base.pug에 블록을 만들었다.
+- 그리고 home.pug를 보면, 우리가 base.pug를 확장(extends)하고 있기 때문에 우리는 content 블록에 내용을 집어 넣을 수 있게 된다는 것이다.
+- 이렇게 하는 방식은 결과적으로 base.pug에 있는 코드를 다른 home, watch, edit에 복붙하고 사용하는 것과 같은 것이다.
+- block은 얼마든지 넣을 수 있다.
+- 그런데 이 블록 마저도 반복되고 있다. 이 블록을 하나로 줄일려면 어떻게 해야할까?
+
+# 5.4 Variables to Templates
+
+- extend는 html의 베이스를 가질 수 있게 해주기 때문에 좋다.
+- 게다가 일부분은 우리가 수정할 수도 있기 때문에 좋다.
+- 우리의 파일이 블록을 가진다는 건 우리가 그 파일을 확장을 하면 우리는 그 블록안에 내용을 채울 수 있다는 것.
+- 블록은 확장한 템플릿 안에 내용을 넣을 수 있는 창문 또는 문 같은 것.
+- 만약 base에서 확장을 하면 edit은 그 base의 복제품이 되는 것, 하지만 base는 2개의 블록을 가지고 있기 때문에 그 안에 내용을 채워 넣을 수 있다.
+- 블록은 보통 커스터마이즈한 html을 넣을 때 사용한다.
+- 예로 base가 footer를 가지면 edit, watch, home은 footer를 바꿀 이유가 없어진다. 하지만 edit, watch, home은 body안에 있는 content를 수정하고 싶을 수가 있는데 그럴 때는 블록을 만들어 사용한다.
+- 블록을 사용해도
+
+```js
+block head
+    title Home | Wetube
+```
+
+- | Wetube는 반복이 된다. 이부분을 간편하게 바꿀려면 어떻게 해야할까?
+
+## 5.4.1 변수 템플릿
+
+```js
+head
+    title #{pageTitle} | Wetube
+```
+
+- res.render는 두 가지의 인수를 받는데, 하나는 view의 이름이고, 하나는 템플릿에 보낼 변수이다.
+- `res.render("home", {pageTitle:"Home"})`
+
+### 요약
+
+- 우리는 home.pug를 렌더링하는데, home.pug는 base.pug를 확장하고, base.pug는 우리가 직접 채우는 content 블록을 가지고 있고, pageTitle이라는 것을 가지고 있다.
+- pageTitle은 우리가 제공해야할 변수이다.
+- 변수를 제공하는 방법은 render에 파일명을 쓰고 변수를 쓰는 것이다.
+
+# 5.5 Pug 요약
+
+- pug는 아주 깔끔하다.
+  - 왜냐? 지저분한 HTML을 쓰지 않고, 파이썬 처럼 깔끔한 코드를 쓸 수 있다.
+  - 태그를 열고 닫을 필요없이 탭과 띄어쓰기로 구분된다.
+- express에게 이것을 렌더링하고 유저에게 보내달라고 하는 법을 배웠다.
+  - res.render("viewName"), viewName => pug 파일 이름
+  - express에게 우리의 웹사이트 views는 "wetube/src/views"에 있다고 알려주었다.
+    - `app.set("views", process.cwd() + "/src/views");`
+- 반복되는 코드를 줄일 수 있다.
+
+  - partials 폴더에 footer.pug 파일을 만들어 반복되는 footer를 한 파일로 줄일 수 있다.
+    - 하나의 파일로 줄인 이 파일은 include를 통해 불러올 수 있다.
+  - 파일을 불러오는 이 구조를 매번 복붙하는 것 또한 줄일 수 있다.
+
+    - base.pug 파일을 만들어 구조를 base.pug에 넣고 다른 파일들은 모두 삭제하고 extends로 상속 받는다.
+      - 이렇게 상속을 받게 되면 모든 파일들이 base의 복제품이 되어버린다.
+      - base에서 부분적으로 다른 것을 만들고 싶을 때는 block을 이용한다.
+    - block은 주머니 같은 개념으로 base에 `block content` 작성하고, 다른 파일에서 이 부분을 사용하고 싶다면 block content 안에 컨텐츠를 작성해주면 된다.
+
+    ```js
+    block content
+        h1 Home
+    ```
+
+    - block을 사용해도 내용에서 반복되는 경우는 변수를 사용할 수 있다.
+
+    ```js
+    head
+        title #{pageTitle} | Wetube
+    ```
+
+    - 변수란 제공해주는 변수로 render의 두번째 인수에 변수를 제공해줄 수 있다.
+
+# 5.6 MVP Styles
+
+- HTML의 element(요소)들을 이쁘게 만들어주는 역할을 한다.
+- `link(rel="stylesheet" href="https://unpkg.com/mvp.css")`
