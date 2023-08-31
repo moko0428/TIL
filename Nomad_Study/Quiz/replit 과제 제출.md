@@ -19,3 +19,9 @@
 > [32일차](https://codesandbox.io/s/nomad-study-moko-32-8gvsc7)
 
 > [36일차](https://codesandbox.io/s/nomad-study-36-7vd5dn?file=/src/index.js)
+
+> [38일차](https://codesandbox.io/s/nomad-challenge-moko-38-ffyv62)
+
+> [39일차](https://codesandbox.io/s/nomad-challenge-39-mc26sf)
+
+> [40일차](https://codesandbox.io/s/a10blueprint-forked-rth5d9?file=/src/models/Movie.js)

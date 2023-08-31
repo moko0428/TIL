@@ -52,3 +52,54 @@ export const postEdit = (req, res) => {
 
 - app.use(express.urlencoded({ extended: true }));
 - 우리의 express application이 form의 value들을 이해할 수 있도록 하고, 우리가 쓸 수 있는 자바스크립트 형식으로 변형시켜준다.
+
+# 6.7 Introduction to MongoDB
+
+- 다목적용, document를 기반으로 한다.
+- 현대의 애플리케이션 개발자를 위해 만들어진 분산 데이터베이스.
+- JSON-like-document, 행으로 된 데이터를 저장할 필요가 없다.
+
+# 6.8 Connecting to Mongo
+
+- mongoose : node.js와 mongoDB를 이어주는 다리 같은 역할
+- 우리가 자바스크립트로 적으면, mongoose가 mongoDB에게 변환해서 전해준다.
+
+```js
+mongoose.connect("mogodb://127.0.0.1:27017/wetube", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
+const db = mongoose.connection;
+
+const handleOpen = () => console.log("✅ Connected to DB");
+const handleError = (error) => console.log("❌ DB Error", error);
+db.on("error", handleError);
+db.once("open", handleOpen);
+```
+
+# 6.9 CRUD
+
+- C : create
+- R : read
+- U : update
+- D : delete
+
+```js
+import mongoose from "mongoose";
+
+// Create a Movie Model here.
+const movieSchema = new mongoose.Schema({
+  title: String,
+  sumary: String,
+  year: Date,
+  genres: [{ type: String }],
+  meta: {
+    views: Number,
+    rating: Number,
+  },
+});
+
+const Movie = mongoose.model("movie", movieSchema);
+export default Movie;
+```
