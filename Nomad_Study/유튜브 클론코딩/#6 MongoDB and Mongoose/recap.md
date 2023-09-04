@@ -85,6 +85,10 @@ db.once("open", handleOpen);
 - U : update
 - D : delete
 
+# 6.10 Video model
+
+- 비디오 파일의 데이터 형식을 정의하기
+
 ```js
 import mongoose from "mongoose";
 
@@ -103,3 +107,22 @@ const movieSchema = new mongoose.Schema({
 const Movie = mongoose.model("movie", movieSchema);
 export default Movie;
 ```
+
+# 6.11 Our First Query
+
+- 앞으로 더 많은 임포트를 하게 되기 때문에 init.js 파일로 임포트를 따로 관리해준다.
+
+- Model.find() : 두 가지 사용법이 있다.
+
+1. callback :
+
+- 무언가가 발생하고 난 다음 호출되는 function을 말한다.
+- 자바스크립트에서 기다림을 표현하는 하나의 방법이라고 생각하면 된다.
+- 무언가가 발생한 다음(then) 어떤 것을 한다는 식의 말의 뜻은 어떤 것들은 실행과 동시에 적용되지 않기 때문이다.
+- 예로 PORT 같은 경우엔 4000 PORT에 연결을 해야하는데, 해당 코드는 바로 실행되지 않을 수 있다는 것이다. (백만분의 일초라 해도 결과값 도출을 기다려야한다는 것)
+- 즉, find() 또한 데이터가 완전히 전송될 때까지 기다려야 한다.
+- `find({}, (error, documents))` : 중괄호는 search terms를 나타내는데, 비어있으면 모든 형식을 찾는다는 것을 뜻한다.
+  - 이것으로 모든 형태의 비디오를 찾게 되고, 다음 단계로 callback을 전송하는 것이다.
+  - callback은 err와 docs라는 signature를 가진다.
+
+2. promise
