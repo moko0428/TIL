@@ -25,3 +25,5 @@
 > [39일차](https://codesandbox.io/s/nomad-challenge-39-mc26sf)
 
 > [40일차](https://codesandbox.io/s/a10blueprint-forked-rth5d9?file=/src/models/Movie.js)
+
+> [44일차](https://codesandbox.io/s/nomad-challenge-44-moko-hmtj7c)
