@@ -9,7 +9,7 @@ function solution(n, k){
       // n이 k로 나누어 떨어지지 않는 경우
       n--;
     }
-    count++;
+    count++; // 카운트 증가
   }
   return count;
 }
