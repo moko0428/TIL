@@ -1,0 +1,271 @@
+2. 거스름돈 문제
+n = 1260
+cnt = 0
+
+coinTypes = [500, 100, 50, 10]
+
+for coin in coinTypes:
+	cnt += n // coin
+	n %= coin
+print(cnt)
+
+2. 동전 0
+N, K = map(int, input().split())
+coin_list = list()
+for i in range(N):
+  coin_list.append(int(input()))
+
+count = 0
+for i in reversed(range(N)):
+  count += K // coin_list[i]
+  K = K % coin_list[i]
+
+print(count)
+
+3. 1이 될때까지
+n, k = map(int, input().split())
+
+result = 0
+
+while True:
+	target = (n//k)*k
+	result += (n-target)
+	n = target
+	if n<k:
+		break
+	result += 1
+	n //= k
+result += (n-1)
+print(result)
+
+4. 곱하기 혹은 더하기
+data = input()
+
+result = int(data[0])
+
+for i in range(1, len(data)):
+	num = int(data[i])
+	if num<=1 or result <=1:
+		result += num
+	else:
+		result *= num
+print(result)
+
+5. ATM
+n = int(input())
+
+peoples = list(map(int, input().split()))
+
+peoples.sort()
+answer = 0
+
+for x in range(1, n+1):
+  answer += sum(peoples[0:x])
+print(answer)
+
+6. 0값을 찾아 배열 뒤로 배치시키기
+function solution(arr){
+  let notZero = arr.filter(i=>i!==0);
+  let total = arr.length - notZero.length;
+  for(let i = 0; i < total; i++){
+    notZero.push(0);
+  }
+  return notZero;
+
+7. 문자열 다 더하기
+n = input()
+sNum = list(input())
+
+sum = 0
+for i in sNum:
+  sum += int(i)
+
+print(sum)
+
+8. 평균값 구하기
+function solution(n, score){
+  let score = score.sort();
+  return score.map(i=>i/score[2]*100).reduce((a,c)=>a+c) / n;
+}
+
+9. 상하좌우
+N = int(input())
+plan = input().split()
+x, y = 1, 1
+
+type = ['L', 'R', 'U', 'D']
+
+for i in range(len(plan)):
+  if plan[i] == type[0]:
+    if y - 1 == 0:
+      continue
+    else:
+      y = y - 1
+  if plan[i] == type[1]:
+    if y + 1 == N + 1:
+      continue
+    else:
+      y = y + 1
+  if plan[i] == type[2]:
+    if x - 1 == 0:
+      continue
+    else:
+      x = x + 1
+  if plan[i] == type[3]:
+    if x + 1 == N + 1:
+      continue
+    else:
+      x = x + 1
+      
+print(x, y)
+
+10. 시각
+n, k = map(int, input().split())
+h, m, s = 0, 0, 0
+cnt = 0
+k = str(k)
+for h in range(0, n+1):
+  if h < 10:
+    h = '0' + str(h)
+  for m in range(0, 60):
+    if m < 10:
+      m = '0' + str(m)
+    for s in range(0, 60):
+      if s < 10:
+        s = '0' + str(s)
+      if k in str(h) or k in str(m) or k in str(s):
+        cnt += 1
+
+print(cnt)
+
+11. 왕실의 나이트
+data = input()
+row = int(data[1])
+column = int(ord(data[0])) - int(ord('a')) + 1
+steps = [(-2, -1), (-1, -2), (-2, 1), (-1, 2), (2, -1), (1, -2), (2, 1), (1, 2)]
+
+result = 0
+for step in steps:
+  next_row = row + step[0]
+  next_column = column + step[1]
+  if next_row <= 8 and 1 <= next_row and next_column <= 8 and 1 <= next_column:
+    result += 1
+
+print(result)
+
+12. DFS
+def dfs(graph, v, visited):
+	visited[v] = True
+	print(v, end='')
+	for i in graph[v]:
+		if not visited[i]:
+			dfs(graph, i, visited)
+graph = [
+	[],
+	[2,3,8],
+	[1,7],
+	[1,4,5],
+	[3,5],
+	[3,4],
+	[7],
+	[2,6,8],
+	[1,7]
+]
+
+visited = [False] * 9
+dfs(graph, 1, visited)
+// 1 2 7 6 8 3 4 5
+
+13. BFS
+from collections import deque
+
+def bfs(graph, start, visited):
+	queue = deque([start])
+	visited[start] = True
+	while queue:
+		v = queue.popleft()
+		print(v, end='')
+		for i in graph[v]:
+			if not visited[i]:
+				queue.append(i)
+				visited[i] = True
+graph = [
+	[],
+	[2,3,8],
+	[1,7],
+	[1,4,5],
+	[3,5],
+	[3,4],
+	[7],
+	[2,6,8],
+	[1,7]
+]
+visited = [False] * 9
+bfs(graph, 1, visited)
+
+// 1 2 3 7 8 4 5 6
+
+14. 음료수 얼려먹기
+def dfs(x,y):
+	if x <= -1 or x>=n or y<=-1 or y>=m:
+		return False
+	if graph[x][y] == 0:
+		graph[x][y] = 1
+		dfs(x-1,y)
+		dfs(x,y-1)
+		dfs(x+1,y)
+		dfs(x,y+1)
+		return True
+	return False
+n,m = map(int, input().split())
+graph = [];
+for i in range(n):
+	graph.append(list(map(int, input())))
+
+result = 0
+for i in range(n):
+	for j in range(m):
+		if dfs(i, j) == True:
+			result += 1
+print(result)
+
+15. DFS와 BFS
+from collections import deque
+import sys
+
+n, m, start = map(int, sys.stdin.readline().strip().split())
+
+edge = [[] for _ in range(n + 1)]
+
+for _ in range(m):
+    v1, v2 = map(int, sys.stdin.readline().strip().split())
+    edge[v1].append(v2)
+    edge[v2].append(v1)
+
+for e in edge:
+    e.sort()
+
+d_check = [False for _ in range(n + 1)]
+def dfs(x):
+    d_check[x] = True
+    print(x, end = ' ')
+    for y in edge[x]:
+        if d_check[y] == False:
+            dfs(y)
+
+def bfs():
+    queue = deque([start])
+    b_check = [False for _ in range(n + 1)]
+    b_check[start] = True
+    while queue:
+        v = queue.popleft()
+        print(v, end = ' ')
+        for i in edge[v]:
+            if not b_check[i]:
+                b_check[i] = True
+                queue.append(i)
+
+dfs(start)
+print()
+bfs()
+print()
